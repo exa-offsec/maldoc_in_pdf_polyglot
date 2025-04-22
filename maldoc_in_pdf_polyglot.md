@@ -98,3 +98,4 @@ msf6 auxiliary(fileformat/maldoc_in_pdf_polyglot) > run
 1. <https://blogs.jpcert.or.jp/en/2023/08/maldocinpdf.html>
 2. <https://socradar.io/maldoc-in-pdf-a-novel-method-to-distribute-malicious-macros/>
 3. <https://www.nospamproxy.de/en/maldoc-in-pdf-danger-from-word-files-hidden-in-pdfs/>
+4. <https://github.com/exa-offsec/maldoc_in_pdf_polyglot/tree/main/demo>
