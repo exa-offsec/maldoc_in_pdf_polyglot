@@ -3,7 +3,7 @@
 The technique is called "MalDoc in PDF". This technique hides malicious Word documents in PDF files,
 which is why malicious code contained in them cannot be detected by many analysis tools.
 
-The document can be opened in both Microsoft Word/Excel (depending on the payload) and a PDF reader.
+The document can be opened in both Microsoft Word and a PDF reader.
 
 However, for the macro to run, you must open this document in Microsoft Word. The attack does not bypass
 configured macro locks. The malicious macros are also not executed when the file is opened in PDF readers
@@ -11,10 +11,21 @@ or similar software.
 
 ### Introduction
 
-A malicious MHT file created can be opened in Microsoft Word/Excel even though it has magic numbers
-and file structure of PDF.
+A malicious MHT file created can be opened in Microsoft Word even though it has magic numbers and file
+structure of PDF.
 
-If the file has configured macro, by opening it in Word/Excel, VBS runs and performs malicious behaviors.
+If the file has configured macro, by opening it in Microsoft Word, VBS runs and performs malicious behaviors.
+
+## For Testing
+
+You create a `Single File Web Page (*.mht, *.mhtml)` file containing a VBS macro. For testing, you can use the
+following macro:
+
+```
+Sub AutoOpen()
+   MsgBox "Macro executed successfully!", vbInformation, "Information"
+End Sub
+```
 
 ## Verification Steps
 

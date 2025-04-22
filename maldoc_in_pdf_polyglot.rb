@@ -12,10 +12,10 @@ class MetasploitModule < Msf::Auxiliary
         info,
         'Name' => 'Maldoc in PDF Polyglot converter',
         'Description' => %q{
-          A malicious MHT file created can be opened in Microsoft Word/Excel even though it has magic numbers
-          and file structure of PDF.
+          A malicious MHT file created can be opened in Microsoft Word even though it has magic numbers and file
+          structure of PDF.
 
-          If the file has configured macro, by opening it in Word/Excel, VBS runs and performs malicious behaviors.
+          If the file has configured macro, by opening it in Microsoft Word, VBS runs and performs malicious behaviors.
 
           The attack does not bypass configured macro locks. And the malicious macros are also not executed when the
           file is opened in PDF readers or similar software.
@@ -46,8 +46,6 @@ class MetasploitModule < Msf::Auxiliary
       ]
     )
   end
-
-  # ------------------------------------------------------------------------- #
 
   def create_pdf(mht)
     pdf = ''
@@ -192,8 +190,6 @@ class MetasploitModule < Msf::Auxiliary
 
     print_good("The file '#{fname}' is stored at '#{path}'")
   end
-
-  # ------------------------------------------------------------------------- #
 
   def run
     if datastore['FILENAME'].nil? || datastore['FILENAME'].empty?
